@@ -1,4 +1,6 @@
 ## Laravel Todo List
-This is a simple todo list built in the Laravel PHP framework using Ember.js for some front end operations
+This is a simple todo list built with the Laravel framework and Ember.js
 <hr>
-Based on the Ember.js todo list tutorial http://emberjs.com/guides/getting-started/
+Based on the Ember.js todo list tutorial <br>
+http://emberjs.com/guides/getting-started/<br>
+http://laravel.com/
