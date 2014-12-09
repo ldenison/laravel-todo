@@ -13,5 +13,6 @@
 
 Route::get('/', function()
 {
-	return View::make('index');
+    $model = Todo::find(1);
+	return View::make('index',array("todo"=>$model));
 });
