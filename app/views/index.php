@@ -5,13 +5,6 @@
         <?= HTML::script("js/handlebars-v1.3.0.js");?>
         <?= HTML::script("js/ember.js");?>
         <?= HTML::script("js/ember-data.js");?>
-        <?= HTML::script("js/app/application.js");?>
-        <?= HTML::script("js/app/router.js");?>
-        <?= HTML::script("js/models/todo.js");?>
-        <?= HTML::script("js/controllers/todos_controller.js");?>
-        <?= HTML::script("js/controllers/todo_controller.js");?>
-        <?= HTML::script("js/views/edit_todo_view.js");?>
-
         <?= HTML::script("bootstrap-3.3.1/js/bootstrap.min.js");?>
         <?= HTML::style("bootstrap-3.3.1/css/bootstrap.min.css");?>
         <?= HTML::style("css/style.css");?>
@@ -20,7 +13,6 @@
     <head>
         <meta charset="utf-8">
         <title>Ember.js • TodoMVC</title>
-        <link rel="stylesheet" href="style.css">
     </head>
     <body>
     <script type="text/x-handlebars" data-template-name="todos/index">
@@ -83,5 +75,12 @@
             <p>Double-click to edit a todo</p>
         </footer>
     </script>
+
+    <?= HTML::script("js/app/application.js");?>
+    <?= HTML::script("js/app/router.js");?>
+    <?= HTML::script("js/models/todo.js");?>
+    <?= HTML::script("js/controllers/todos_controller.js");?>
+    <?= HTML::script("js/controllers/todo_controller.js");?>
+    <?= HTML::script("js/views/edit_todo_view.js");?>
     </body>
 </html>
