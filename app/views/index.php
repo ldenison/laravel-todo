@@ -23,6 +23,22 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+    <script type="text/x-handlebars" data-template-name="todos/index">
+        <ul id="todo-list">
+            {{#each todo in model itemController="todo"}}
+                <li {{bind-attr class="todo.isCompleted:completed todo.isEditing:editing"}}>
+                    {{#if todo.isEditing}}
+                        {{edit-todo class="edit" value=todo.title focus-out="acceptChanges" insert-newline="acceptChanges"}}
+                    {{else}}
+                        {{input type="checkbox" checked=todo.isCompleted class="toggle"}}
+                        <label {{action "editTodo" on="doubleClick"}}>{{todo.title}}</label>
+                        <button {{action "removeTodo"}} class="destroy"></button>
+                    {{/if}}
+                </li>
+            {{/each}}
+        </ul>
+    </script>
+
     <script type="text/x-handlebars" data-template-name="todos">
         <section id="todoapp">
             <header id="header">
@@ -36,18 +52,7 @@
             </header>
 
             <section id="main">
-                <ul id="todo-list">
-                    {{#each todo in model itemController="todo"}}
-                        <li {{bind-attr class="todo.isCompleted:completed todo.isEditing:editing"}}>
-                            {{#if todo.isEditing}}
-                                {{edit-todo class="edit" value=todo.title focus-out="acceptChanges" insert-newline="acceptChanges"}}
-                            {{else}}
-                                {{input type="checkbox" checked=todo.isCompleted class="toggle"}}
-                                <label {{action "editTodo" on="doubleClick"}}>{{todo.title}}</label><button class="destroy"></button>
-                            {{/if}}
-                        </li>
-                    {{/each}}
-                </ul>
+                {{outlet}}
 
                 <input type="checkbox" id="toggle-all">
             </section>
@@ -58,19 +63,20 @@
             </span>
                 <ul id="filters">
                     <li>
-                        <a href="all" class="selected">All</a>
+                        {{#link-to "todos.index" activeClass="selected"}}All{{/link-to}}
                     </li>
                     <li>
-                        <a href="active">Active</a>
+                        {{#link-to "todos.active" activeClass="selected"}}Active{{/link-to}}
                     </li>
                     <li>
-                        <a href="completed">Completed</a>
+                        {{#link-to "todos.completed" activeClass="selected"}}Completed{{/link-to}}
                     </li>
                 </ul>
-
-                <button id="clear-completed">
-                    Clear completed (1)
-                </button>
+                {{#if hasCompleted}}
+                    <button id="clear-completed" {{action "clearCompleted"}}>
+                        Clear completed ({{completed}})
+                    </button>
+                {{/if}}
             </footer>
         </section>
 
