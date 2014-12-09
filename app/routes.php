@@ -48,3 +48,9 @@ Route::post("/todos",function() {
 
     $model->save();
 });
+
+Route::delete("/todos/{id}",function($id) {
+    $model = Todo::find($id);
+    $model->delete();
+    return "{}";
+});
