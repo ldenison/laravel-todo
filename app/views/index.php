@@ -10,6 +10,7 @@
         <?= HTML::script("js/models/todo.js");?>
         <?= HTML::script("js/controllers/todos_controller.js");?>
         <?= HTML::script("js/controllers/todo_controller.js");?>
+        <?= HTML::script("js/views/edit_todo_view.js");?>
 
         <?= HTML::script("bootstrap-3.3.1/js/bootstrap.min.js");?>
         <?= HTML::style("bootstrap-3.3.1/css/bootstrap.min.css");?>
@@ -37,9 +38,13 @@
             <section id="main">
                 <ul id="todo-list">
                     {{#each todo in model itemController="todo"}}
-                        <li {{bind-attr class="todo.isCompleted:completed"}}>
-                            {{input type="checkbox" checked=todo.isCompleted class="toggle"}}
-                            <label>{{todo.title}}</label><button class="destroy"></button>
+                        <li {{bind-attr class="todo.isCompleted:completed todo.isEditing:editing"}}>
+                            {{#if todo.isEditing}}
+                                {{edit-todo class="edit" value=todo.title focus-out="acceptChanges" insert-newline="acceptChanges"}}
+                            {{else}}
+                                {{input type="checkbox" checked=todo.isCompleted class="toggle"}}
+                                <label {{action "editTodo" on="doubleClick"}}>{{todo.title}}</label><button class="destroy"></button>
+                            {{/if}}
                         </li>
                     {{/each}}
                 </ul>
@@ -49,7 +54,7 @@
 
             <footer id="footer">
             <span id="todo-count">
-              <strong>2</strong> todos left
+              <strong>{{remaining}}</strong> {{inflection}} left
             </span>
                 <ul id="filters">
                     <li>
